@@ -1,0 +1,161 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Link game test</title>
+</head>
+<body>
+
+<section>
+
+<!-- This div is the canvas -->
+<div>
+<canvas id="canvas" width="800" height="600">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+
+<script type="text/javascript">
+/*
+   index.html - draws a dot on the screen, credit to:
+   http://html5.litten.com/moving-shapes-on-the-html5-canvas-with-the-keyboard/
+   programmer: MHoel, Nov 3, 2014
+*/
+
+
+// Set some global variables
+var canvas;
+var ctx;
+var dx = 60;
+var dy = 80;
+var x = 150;
+var cirx = Math.floor((Math.random() * 300) + 1);
+var ciry = Math.floor((Math.random() * 200) + 1);
+var cirx1 = Math.floor((Math.random() * 300) + 1);
+var ciry1= Math.floor((Math.random() * 200) + 1);
+var cirx2 = Math.floor((Math.random() * 300) + 1);
+var ciry2 = Math.floor((Math.random() * 200) + 1);
+var cirx3 = Math.floor((Math.random() * 300) + 1);
+var ciry3 = Math.floor((Math.random() * 200) + 1);
+var y = 100;
+var WIDTH = 800;
+var HEIGHT = 600;
+var imgname = "https://s21.postimg.org/rwwxalaaf/darthidle.png"
+
+
+
+function circle(x,y,r) {
+	ctx.beginPath();
+	ctx.arc(x, y, r, 0, Math.PI*2, true);
+	ctx.fill();
+}
+
+function rect(x,y,w,h) {
+	ctx.beginPath();
+	ctx.rect(x,y,w,h);
+	ctx.closePath();
+	ctx.fill();
+	ctx.stroke();
+}
+
+function clear() {
+	ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+// Important starting function
+function init() {
+	canvas = document.getElementById("canvas");
+	ctx = canvas.getContext("2d");
+	return setInterval(draw, 120); // this is key, tells draw function to fire 10x per second
+}
+
+function doKeyDown(evt){
+	switch (evt.keyCode) {
+		case 38:  /* Up arrow was pressed */
+			if (y - dy > 0){
+				y -= dy;
+			}
+			imgname = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+			
+			break;
+		case 40:  /* Down arrow was pressed */
+			if (y + dy < HEIGHT){
+				y += dy;
+			}
+			imgname = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+			
+			break;
+		case 37:  /* Left arrow was pressed */
+			if (x - dx > 0){
+				x -= dx;
+			}
+			imgname = "https://s18.postimg.org/i38iaavpx/darthleft.png";
+			
+			break;
+		case 39:  /* Right arrow was pressed */
+			if (x + dx < WIDTH){
+				x += dx;
+			}
+			imgname = "https://s18.postimg.org/h289l6eqd/darthright.png";
+			
+			break;
+		case 16: /* number 1 was pressed */
+			imgname = "https://s18.postimg.org/vhgzsld05/darthcrouch.png";
+			break;
+		case 32:
+			if (y - dy > 0) {
+				y-= dy;
+			}
+			imgname = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+			break;
+		case 65:
+			imgname = "https://s22.postimg.org/ntmtzgkdd/Screen_Shot_2017_03_03_at_9_51_41_AM.png";
+			break;
+		case 17:
+			if (y + dy < HEIGHT) {
+				y += dy;
+			}
+			imgname = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+			break;
+		}
+
+}
+
+
+function draw() {
+	
+	ctx.fillStyle = "#400040";
+
+	ctx.strokeStyle = "black";
+	rect(0,0,WIDTH,HEIGHT);
+	
+	var img = new Image;
+	img.onload = function() {
+		ctx.drawImage(img,x,y);
+		
+};
+	img.src = imgname;
+	ctx.fillStyle = "red";
+	for (i = 0; i < 5; i++) {
+		circle(cirx3,ciry3,10);
+	}
+	ctx.fillStyle = "blue";
+	circle(cirx,ciry,10);
+	
+	ctx.fillStyle = "white";
+	circle(cirx1,ciry1,10);
+
+
+}
+
+// Main part of program
+init();
+window.addEventListener('keydown',doKeyDown,true);
+
+
+</script>
+</section>
+
+</body>
+</html>
