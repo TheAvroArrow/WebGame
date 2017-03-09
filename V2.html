@@ -39,6 +39,8 @@ var ciry2 = Math.floor((Math.random() * 200) + 1);
 var cirx3 = Math.floor((Math.random() * 300) + 1);
 var ciry3 = Math.floor((Math.random() * 200) + 1);
 var y = 100;
+var isOnPlatform = false; 
+var gravity = true; 
 var WIDTH = 800;
 var HEIGHT = 600;
 var imgname = "https://s21.postimg.org/rwwxalaaf/darthidle.png"
@@ -63,11 +65,54 @@ function clear() {
 	ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
+function tick(){ //this function runs every 45 miliseconds
+
+	draw();
+	checkIfOnPlatform();
+	fall();
+}
+
 // Important starting function
 function init() {
+
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
-	return setInterval(draw, 120); // this is key, tells draw function to fire 10x per second
+
+	// LOADIING IMAGES
+
+	var darthup = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+	var darthdown = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+	var darthleft = "https://s18.postimg.org/i38iaavpx/darthleft.png";
+	var darthright = "https://s18.postimg.org/h289l6eqd/darthright.png";
+
+
+
+	// LOADING IMAGES
+
+	setInterval(tick,45); // this is key, tells draw function to fire 10x per second
+	
+}
+
+function fall() {
+
+	if(isOnPlatform == false){
+		y = y+10;
+		imgname = "https://s2.postimg.org/oxh3t3tyx/Screen_Shot_2017_03_03_at_9_45_52_AM.png";
+
+		
+	} else {
+		return;
+	}
+}
+
+function checkIfOnPlatform(){
+
+	if(y >= HEIGHT - dy){
+		isOnPlatform = true;
+		console.log("called");
+	} else {
+		isOnPlatform = false;
+	}
 }
 
 function doKeyDown(evt){
@@ -121,6 +166,7 @@ function doKeyDown(evt){
 		}
 
 }
+
 
 
 function draw() {
